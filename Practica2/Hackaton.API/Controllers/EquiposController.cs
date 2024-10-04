@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 namespace Hackaton.API.Controllers
 {
     [ApiController]
-    [Route("/api/participantes")]
-    public class ParticipantesController:ControllerBase
+    [Route("/api/equipos")]
+    public class EquiposController : ControllerBase
     {
         private readonly DataContext _context;
-        public ParticipantesController(DataContext context)
+        public EquiposController(DataContext context)
         {
             _context = context;
         }
@@ -20,25 +20,25 @@ namespace Hackaton.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Participantes.ToArrayAsync());
+            return Ok(await _context.Equipos.ToArrayAsync());
         }
 
 
-        //PUT --> MODIFICAR UN PARTICIPANTE
+        //PUT --> MODIFICAR UN EQUIPO
         [HttpPut]
-        public async Task<ActionResult> Put(Participante participante)
+        public async Task<ActionResult> Put(Equipo equipo)
         {
-            _context.Update(participante);
+            _context.Update(equipo);
             await _context.SaveChangesAsync();
-            return Ok(participante); //Para que muestre que valor modificado
+            return Ok(equipo); //Para que muestre que valor modificado
 
         }
 
-        //DELETE --> BORRAR UN PARTICIPANTE
+        //DELETE --> BORRAR UN EQUIPO
         [HttpDelete("{id:int}")] //Busque por parametro Id
-        public async Task<ActionResult> Delete(int id) 
+        public async Task<ActionResult> Delete(int id)
         {
-            var FilasAfectadas = await _context.Participantes
+            var FilasAfectadas = await _context.Equipos
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
 
@@ -55,28 +55,30 @@ namespace Hackaton.API.Controllers
 
         //GET POR PARAMETRO 
         [HttpGet("{id:int}")] //Busque por parametro Id
-        public async Task<ActionResult> Get(int id) 
+        public async Task<ActionResult> Get(int id)
         {
-            var participante = await _context.Participantes.FirstOrDefaultAsync(x => x.Id == id);
-            if (participante == null)
+            var equipo = await _context.Equipos.FirstOrDefaultAsync(x => x.Id == id);
+            if (equipo == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(participante);
+                return Ok(equipo);
             }
         }
 
 
         //POST --> INSERTAR NUEVO PARTICIPANTE
         [HttpPost]
-        public async Task<ActionResult> Post(Participante participante)
+        public async Task<ActionResult> Post(Equipo equipo)
         {
-            _context.Add(participante);
+            _context.Add(equipo);
             await _context.SaveChangesAsync();
-            return Ok(participante); 
+            return Ok(equipo);
 
         }
+
+
     }
 }

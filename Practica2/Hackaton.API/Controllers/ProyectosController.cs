@@ -3,42 +3,42 @@ using Hackaton.SHARED.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Hackaton.API.Controllers
 {
     [ApiController]
-    [Route("/api/participantes")]
-    public class ParticipantesController:ControllerBase
+    [Route("/api/proyectos")]
+    public class ProyectosController:ControllerBase
     {
         private readonly DataContext _context;
-        public ParticipantesController(DataContext context)
+        public ProyectosController(DataContext context)
         {
             _context = context;
         }
-
 
         //GET POR LISTA 
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Participantes.ToArrayAsync());
+            return Ok(await _context.Proyectos.ToArrayAsync());
         }
 
 
-        //PUT --> MODIFICAR UN PARTICIPANTE
+        //PUT --> MODIFICAR UN PROYECTO
         [HttpPut]
-        public async Task<ActionResult> Put(Participante participante)
+        public async Task<ActionResult> Put(Proyecto proyecto)
         {
-            _context.Update(participante);
+            _context.Update(proyecto);
             await _context.SaveChangesAsync();
-            return Ok(participante); //Para que muestre que valor modificado
+            return Ok(proyecto); //Para que muestre que valor modificado
 
         }
 
-        //DELETE --> BORRAR UN PARTICIPANTE
+        //DELETE --> BORRAR UN PROYECTO
         [HttpDelete("{id:int}")] //Busque por parametro Id
-        public async Task<ActionResult> Delete(int id) 
+        public async Task<ActionResult> Delete(int id)
         {
-            var FilasAfectadas = await _context.Participantes
+            var FilasAfectadas = await _context.Proyectos
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
 
@@ -55,27 +55,27 @@ namespace Hackaton.API.Controllers
 
         //GET POR PARAMETRO 
         [HttpGet("{id:int}")] //Busque por parametro Id
-        public async Task<ActionResult> Get(int id) 
+        public async Task<ActionResult> Get(int id)
         {
-            var participante = await _context.Participantes.FirstOrDefaultAsync(x => x.Id == id);
-            if (participante == null)
+            var proyecto = await _context.Proyectos.FirstOrDefaultAsync(x => x.Id == id);
+            if (proyecto == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(participante);
+                return Ok(proyecto);
             }
         }
 
 
-        //POST --> INSERTAR NUEVO PARTICIPANTE
+        //POST --> INSERTAR NUEVO PROYECTO
         [HttpPost]
-        public async Task<ActionResult> Post(Participante participante)
+        public async Task<ActionResult> Post(Proyecto proyecto)
         {
-            _context.Add(participante);
+            _context.Add(proyecto);
             await _context.SaveChangesAsync();
-            return Ok(participante); 
+            return Ok(proyecto);
 
         }
     }
