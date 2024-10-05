@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hackaton.Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,5 +29,13 @@ namespace Hackaton.SHARED.Entities
         [MaxLength(50, ErrorMessage = "El {2} no puede tener mas de 50 caracteres.")]
         [Required(ErrorMessage = "El {2} es obligatorio.")]
         public string AreaExperta { get; set; }
+
+        public Hackaton Hackaton { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
+        public int HackatonId { get; set; }
+
+        public ICollection<Evaluacion> Evaluacion { get; set; }  //ENVIA FORANEA A EVALUACION
+
+
+
     }
 }

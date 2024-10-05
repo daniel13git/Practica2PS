@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
@@ -32,5 +33,20 @@ namespace Hackaton.SHARED.Entities
         [MaxLength(3, ErrorMessage = "El {3} no puede tener mas de 3 caracteres.")]
         [Required(ErrorMessage = "El {3} es obligatorio.")]
         public string Experiencia { get; set; }
+
+        //RELACIONES
+        [JsonIgnore]
+        public Hackaton Hackaton { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
+        public int HackatonId { get; set; }
+
+
+        [JsonIgnore]
+        public ICollection <Participante> Participantes { get; set; } //ENVIA FORANEA A PARTICIPANTE
+
+        [JsonIgnore]
+        public ICollection<Proyecto> Proyecto { get; set; }  //ENVIA FORANEA A PROYECTO
+
+        
+
     }
 }
