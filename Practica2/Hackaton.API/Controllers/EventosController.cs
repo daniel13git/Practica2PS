@@ -7,11 +7,11 @@ namespace Hackaton.API.Controllers
 {
 
     [ApiController]
-    [Route("/api/hackatons")]
-    public class HackatonsController : ControllerBase
+    [Route("/api/eventos")]
+    public class EventosController : ControllerBase
     {
         private readonly DataContext _context;
-        public HackatonsController(DataContext context)
+        public EventosController(DataContext context)
         {
             _context = context;
         }
@@ -21,17 +21,17 @@ namespace Hackaton.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Hackatons.ToArrayAsync());
+            return Ok(await _context.Eventos.ToArrayAsync());
         }
 
 
         //PUT --> MODIFICAR UN Hackaton
         [HttpPut]
-        public async Task<ActionResult> Put(HackatonsController hackaton)
+        public async Task<ActionResult> Put(EventosController eventos)
         {
-            _context.Update(hackaton);
+            _context.Update(eventos);
             await _context.SaveChangesAsync();
-            return Ok(hackaton); //Para que muestre que valor modificado
+            return Ok(eventos); //Para que muestre que valor modificado
 
         }
 
@@ -39,7 +39,7 @@ namespace Hackaton.API.Controllers
         [HttpDelete("{id:int}")] //Busque por parametro Id
         public async Task<ActionResult> Delete(int id)
         {
-            var FilasAfectadas = await _context.HackatonController
+            var FilasAfectadas = await _context.Eventos
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
 
@@ -58,25 +58,25 @@ namespace Hackaton.API.Controllers
         [HttpGet("{id:int}")] //Busque por parametro Id
         public async Task<ActionResult> Get(int id)
         {
-            var hackaton = await _context.Hackatons.FirstOrDefaultAsync(x => x.Id == id);
-            if (hackaton == null)
+            var eventos = await _context.Eventos.FirstOrDefaultAsync(x => x.Id == id);
+            if (eventos == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(hackaton);
+                return Ok(eventos);
             }
         }
 
 
         //POST --> INSERTAR NUEVO MENTOR
         [HttpPost]
-        public async Task<ActionResult> Post(HackatonsController hackaton)
+        public async Task<ActionResult> Post(EventosController eventos)
         {
-            _context.Add(hackaton);
+            _context.Add(eventos);
             await _context.SaveChangesAsync();
-            return Ok(hackaton);
+            return Ok(eventos);
 
         }
     }

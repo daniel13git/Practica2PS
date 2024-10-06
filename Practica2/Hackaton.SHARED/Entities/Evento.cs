@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
 {
-    public class Hackaton
+    public class Evento
     {
         // Primary key - autoincrement
         public int Id { get; set; }

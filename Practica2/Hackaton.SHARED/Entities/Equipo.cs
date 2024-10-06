@@ -36,8 +36,8 @@ namespace Hackaton.SHARED.Entities
 
         //RELACIONES
         [JsonIgnore]
-        public Hackaton Hackaton { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
-        public int HackatonId { get; set; }
+        public Evento Evento { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
+        public int EventoId { get; set; }
 
 
         [JsonIgnore]

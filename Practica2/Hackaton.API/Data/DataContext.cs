@@ -11,7 +11,7 @@ namespace Hackaton.API.Data
 
         }
 
-        public DbSet<Hackaton> Hackatons { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
         public DbSet<Participante> Participantes { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<Mentor> Mentores { get; set; }

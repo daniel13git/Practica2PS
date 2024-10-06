@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Hackaton.API.Migrations
 {
     /// <inheritdoc />
-    public partial class relaciones1 : Migration
+    public partial class one : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Hackaton",
+                name: "Eventos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,7 +27,7 @@ namespace Hackaton.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hackaton", x => x.Id);
+                    table.PrimaryKey("PK_Eventos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,15 +40,15 @@ namespace Hackaton.API.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CantidadMiembros = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     Experiencia = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    HackatonId = table.Column<int>(type: "int", nullable: false)
+                    EventoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Equipos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Equipos_Hackaton_HackatonId",
-                        column: x => x.HackatonId,
-                        principalTable: "Hackaton",
+                        name: "FK_Equipos_Eventos_EventoId",
+                        column: x => x.EventoId,
+                        principalTable: "Eventos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -62,15 +62,15 @@ namespace Hackaton.API.Migrations
                     Document = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AreaExperta = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    HackatonId = table.Column<int>(type: "int", nullable: false)
+                    EventoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mentores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mentores_Hackaton_HackatonId",
-                        column: x => x.HackatonId,
-                        principalTable: "Hackaton",
+                        name: "FK_Mentores_Eventos_EventoId",
+                        column: x => x.EventoId,
+                        principalTable: "Eventos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -123,7 +123,7 @@ namespace Hackaton.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Evaluacion",
+                name: "Evaluaciones",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -135,38 +135,38 @@ namespace Hackaton.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Evaluacion", x => x.Id);
+                    table.PrimaryKey("PK_Evaluaciones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Evaluacion_Mentores_MentorId",
+                        name: "FK_Evaluaciones_Mentores_MentorId",
                         column: x => x.MentorId,
                         principalTable: "Mentores",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Evaluacion_Proyectos_ProyectoId",
+                        name: "FK_Evaluaciones_Proyectos_ProyectoId",
                         column: x => x.ProyectoId,
                         principalTable: "Proyectos",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipos_HackatonId",
+                name: "IX_Equipos_EventoId",
                 table: "Equipos",
-                column: "HackatonId");
+                column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Evaluacion_MentorId",
-                table: "Evaluacion",
+                name: "IX_Evaluaciones_MentorId",
+                table: "Evaluaciones",
                 column: "MentorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Evaluacion_ProyectoId",
-                table: "Evaluacion",
+                name: "IX_Evaluaciones_ProyectoId",
+                table: "Evaluaciones",
                 column: "ProyectoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mentores_HackatonId",
+                name: "IX_Mentores_EventoId",
                 table: "Mentores",
-                column: "HackatonId");
+                column: "EventoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Participantes_EquipoId",
@@ -183,7 +183,7 @@ namespace Hackaton.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Evaluacion");
+                name: "Evaluaciones");
 
             migrationBuilder.DropTable(
                 name: "Participantes");
@@ -198,7 +198,7 @@ namespace Hackaton.API.Migrations
                 name: "Equipos");
 
             migrationBuilder.DropTable(
-                name: "Hackaton");
+                name: "Eventos");
         }
     }
 }

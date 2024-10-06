@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackaton.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241005220656_relaciones1")]
-    partial class relaciones1
+    [Migration("20241006061628_one")]
+    partial class one
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,13 +43,13 @@ namespace Hackaton.API.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<int>("EventoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Experiencia")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
-
-                    b.Property<int>("HackatonId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -58,12 +58,12 @@ namespace Hackaton.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HackatonId");
+                    b.HasIndex("EventoId");
 
                     b.ToTable("Equipos");
                 });
 
-            modelBuilder.Entity("Hackaton.SHARED.Entities.Hackaton", b =>
+            modelBuilder.Entity("Hackaton.SHARED.Entities.Evento", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace Hackaton.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hackaton");
+                    b.ToTable("Eventos");
                 });
 
             modelBuilder.Entity("Hackaton.SHARED.Entities.Mentor", b =>
@@ -125,7 +125,7 @@ namespace Hackaton.API.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("HackatonId")
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -135,7 +135,7 @@ namespace Hackaton.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HackatonId");
+                    b.HasIndex("EventoId");
 
                     b.ToTable("Mentores");
                 });
@@ -247,29 +247,29 @@ namespace Hackaton.API.Migrations
 
                     b.HasIndex("ProyectoId");
 
-                    b.ToTable("Evaluacion");
+                    b.ToTable("Evaluaciones");
                 });
 
             modelBuilder.Entity("Hackaton.SHARED.Entities.Equipo", b =>
                 {
-                    b.HasOne("Hackaton.SHARED.Entities.Hackaton", "Hackaton")
+                    b.HasOne("Hackaton.SHARED.Entities.Evento", "Evento")
                         .WithMany("Equipo")
-                        .HasForeignKey("HackatonId")
+                        .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Hackaton");
+                    b.Navigation("Evento");
                 });
 
             modelBuilder.Entity("Hackaton.SHARED.Entities.Mentor", b =>
                 {
-                    b.HasOne("Hackaton.SHARED.Entities.Hackaton", "Hackaton")
+                    b.HasOne("Hackaton.SHARED.Entities.Evento", "Evento")
                         .WithMany()
-                        .HasForeignKey("HackatonId")
+                        .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Hackaton");
+                    b.Navigation("Evento");
                 });
 
             modelBuilder.Entity("Hackaton.SHARED.Entities.Participante", b =>
@@ -320,7 +320,7 @@ namespace Hackaton.API.Migrations
                     b.Navigation("Proyecto");
                 });
 
-            modelBuilder.Entity("Hackaton.SHARED.Entities.Hackaton", b =>
+            modelBuilder.Entity("Hackaton.SHARED.Entities.Evento", b =>
                 {
                     b.Navigation("Equipo");
                 });
