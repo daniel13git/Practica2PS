@@ -49,10 +49,6 @@ namespace Hackaton.SHARED.Entities
         public Equipo Equipo { get; set; } //RECIBE LLAVE FORANEA DE EQUIPO
         public int EquipoId { get; set; }
 
-        [JsonIgnore]
-        public Hackaton Hackaton { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
-        public int HackatonId { get; set; }
-
         public ICollection<Evaluacion> Evaluacion { get; set; }  //ENVIA FORANEA A EVALUACION
     }
 }

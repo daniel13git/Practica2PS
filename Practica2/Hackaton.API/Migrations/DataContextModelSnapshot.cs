@@ -204,9 +204,6 @@ namespace Hackaton.API.Migrations
                     b.Property<DateTime>("FechaEntrega")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HackatonId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -215,8 +212,6 @@ namespace Hackaton.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EquipoId");
-
-                    b.HasIndex("HackatonId");
 
                     b.ToTable("Proyectos");
                 });
@@ -293,15 +288,7 @@ namespace Hackaton.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hackaton.SHARED.Entities.Hackaton", "Hackaton")
-                        .WithMany("Proyecto")
-                        .HasForeignKey("HackatonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Equipo");
-
-                    b.Navigation("Hackaton");
                 });
 
             modelBuilder.Entity("Hackaton.Shared.Entities.Evaluacion", b =>
@@ -309,13 +296,13 @@ namespace Hackaton.API.Migrations
                     b.HasOne("Hackaton.SHARED.Entities.Mentor", "Mentor")
                         .WithMany("Evaluacion")
                         .HasForeignKey("MentorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Hackaton.SHARED.Entities.Proyecto", "Proyecto")
                         .WithMany("Evaluacion")
                         .HasForeignKey("ProyectoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Mentor");
@@ -333,8 +320,6 @@ namespace Hackaton.API.Migrations
             modelBuilder.Entity("Hackaton.SHARED.Entities.Hackaton", b =>
                 {
                     b.Navigation("Equipo");
-
-                    b.Navigation("Proyecto");
                 });
 
             modelBuilder.Entity("Hackaton.SHARED.Entities.Mentor", b =>

@@ -55,8 +55,6 @@ namespace Hackaton.SHARED.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaFin { get; set; }
 
-        [JsonIgnore]
-        public ICollection<Proyecto> Proyecto { get; set; }  //ENVIA FORANEA A PROYECTO
 
         [JsonIgnore]
         public ICollection<Equipo> Equipo { get; set; }  //ENVIA FORANEA A EQUIPO
