@@ -122,17 +122,12 @@ namespace Hackaton.API.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("EventoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventoId");
 
                     b.ToTable("Mentores");
                 });
@@ -258,17 +253,6 @@ namespace Hackaton.API.Migrations
                     b.Navigation("Evento");
                 });
 
-            modelBuilder.Entity("Hackaton.SHARED.Entities.Mentor", b =>
-                {
-                    b.HasOne("Hackaton.SHARED.Entities.Evento", "Evento")
-                        .WithMany()
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Evento");
-                });
-
             modelBuilder.Entity("Hackaton.SHARED.Entities.Participante", b =>
                 {
                     b.HasOne("Hackaton.SHARED.Entities.Equipo", "Equipo")
@@ -296,13 +280,13 @@ namespace Hackaton.API.Migrations
                     b.HasOne("Hackaton.SHARED.Entities.Mentor", "Mentor")
                         .WithMany("Evaluacion")
                         .HasForeignKey("MentorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Hackaton.SHARED.Entities.Proyecto", "Proyecto")
                         .WithMany("Evaluacion")
                         .HasForeignKey("ProyectoId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Mentor");

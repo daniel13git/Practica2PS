@@ -58,5 +58,7 @@ namespace Hackaton.SHARED.Entities
 
         [JsonIgnore]
         public ICollection<Equipo> Equipo { get; set; }  //ENVIA FORANEA A EQUIPO
+        
+
     }
 }

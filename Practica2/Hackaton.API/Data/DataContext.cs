@@ -22,20 +22,6 @@ namespace Hackaton.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Configuración de la relación Evaluacion - Mentor
-            modelBuilder.Entity<Evaluacion>()
-                .HasOne(e => e.Mentor)
-                .WithMany(m => m.Evaluacion) // Asumiendo que Mentor tiene una colección de Evaluaciones
-                .HasForeignKey(e => e.MentorId)
-                .OnDelete(DeleteBehavior.NoAction); // Evita el borrado en cascada
-
-            // Configuración de la relación Evaluacion - Proyecto
-            modelBuilder.Entity<Evaluacion>()
-                .HasOne(e => e.Proyecto)
-                .WithMany(p => p.Evaluacion) // Asumiendo que Proyecto tiene una colección de Evaluaciones
-                .HasForeignKey(e => e.ProyectoId)
-                .OnDelete(DeleteBehavior.NoAction); // Evita el borrado en cascada
         }
     }
 }

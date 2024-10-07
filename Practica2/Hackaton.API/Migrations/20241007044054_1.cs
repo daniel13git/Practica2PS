@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Hackaton.API.Migrations
 {
     /// <inheritdoc />
-    public partial class one : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +31,21 @@ namespace Hackaton.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Mentores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Document = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    AreaExperta = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mentores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Equipos",
                 columns: table => new
                 {
@@ -47,28 +62,6 @@ namespace Hackaton.API.Migrations
                     table.PrimaryKey("PK_Equipos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Equipos_Eventos_EventoId",
-                        column: x => x.EventoId,
-                        principalTable: "Eventos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Mentores",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Document = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AreaExperta = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EventoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Mentores", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Mentores_Eventos_EventoId",
                         column: x => x.EventoId,
                         principalTable: "Eventos",
                         principalColumn: "Id",
@@ -140,12 +133,14 @@ namespace Hackaton.API.Migrations
                         name: "FK_Evaluaciones_Mentores_MentorId",
                         column: x => x.MentorId,
                         principalTable: "Mentores",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Evaluaciones_Proyectos_ProyectoId",
                         column: x => x.ProyectoId,
                         principalTable: "Proyectos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -162,11 +157,6 @@ namespace Hackaton.API.Migrations
                 name: "IX_Evaluaciones_ProyectoId",
                 table: "Evaluaciones",
                 column: "ProyectoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Mentores_EventoId",
-                table: "Mentores",
-                column: "EventoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Participantes_EquipoId",

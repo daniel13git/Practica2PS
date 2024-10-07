@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
@@ -30,10 +31,10 @@ namespace Hackaton.SHARED.Entities
         [Required(ErrorMessage = "El {2} es obligatorio.")]
         public string AreaExperta { get; set; }
 
-        public Evento Evento { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
-        public int EventoId { get; set; }
 
+        [JsonIgnore]
         public ICollection<Evaluacion> Evaluacion { get; set; }  //ENVIA FORANEA A EVALUACION
+
 
 
 
