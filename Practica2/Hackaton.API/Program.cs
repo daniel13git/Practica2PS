@@ -14,20 +14,36 @@ builder.Services.AddTransient<SeedDb>();
 
 var app = builder.Build();
 
-SeedData(app);
+await SeedData(app);
 
-void SeedData(WebApplication app)
+//void SeedData(WebApplication app)
+
+//{
+//    IServiceScopeFactory? scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+//    using (IServiceScope? scope = scopedFactory!.CreateScope())
+
+//    {
+//        SeedDb? service = scope.ServiceProvider.GetService<SeedDb>();
+
+//        service!.SeedAsync().Wait();
+//    }
+//}
+
+async Task SeedData(WebApplication app)
 {
     IServiceScopeFactory? scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
     using (IServiceScope? scope = scopedFactory!.CreateScope())
-
     {
         SeedDb? service = scope.ServiceProvider.GetService<SeedDb>();
-
-        service!.SeedAsync().Wait();
+        if (service != null)
+        {
+            await service.SeedAsync();
+        }
     }
 }
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

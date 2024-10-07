@@ -25,10 +25,10 @@ namespace Hackaton.Shared.Entities
         public string Comentarios { get; set; }
 
 
-        //RELACION FORNAEA CON HACKATON
-        [JsonIgnore]
-        public Mentor Mentor { get; set; } //RECIBE LLAVE FORANEA DE MENTOR
-        public int MentorId { get; set; }
+        
+       //[JsonIgnore]
+       public Mentor Mentor { get; set; } //RECIBE LLAVE FORANEA DE MENTOR
+       public int MentorId { get; set; }
 
         [JsonIgnore]
         public Proyecto Proyecto { get; set; } //RECIBE LLAVE FORANEA DE PROYECTO

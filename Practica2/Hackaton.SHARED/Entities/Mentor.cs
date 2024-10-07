@@ -30,7 +30,7 @@ namespace Hackaton.SHARED.Entities
         [Required(ErrorMessage = "El {2} es obligatorio.")]
         public string AreaExperta { get; set; }
 
-        public Evento Evento { get; set; } //RECIBE LLAVE FORANEA DE HACKATON
+        public Evento Evento { get; set; } //RECIBE LLAVE FORANEA DE EVENTO
         public int EventoId { get; set; }
 
         public ICollection<Evaluacion> Evaluacion { get; set; }  //ENVIA FORANEA A EVALUACION
