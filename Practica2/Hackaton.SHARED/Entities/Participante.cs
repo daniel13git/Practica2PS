@@ -40,7 +40,5 @@ namespace Hackaton.SHARED.Entities
         public Equipo Equipo { get; set; } //RECIBE LLAVE FORANEA DE EQUIPO
         public int EquipoId { get; set; }
 
-
-
     }
 }
