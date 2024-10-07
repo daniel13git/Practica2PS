@@ -45,6 +45,7 @@ namespace Hackaton.SHARED.Entities
 
         [JsonIgnore]
         public ICollection<Proyecto> Proyecto { get; set; }  //ENVIA FORANEA A PROYECTO
+        //**
 
         
 
