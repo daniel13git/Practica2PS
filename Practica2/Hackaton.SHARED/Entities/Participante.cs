@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
@@ -34,6 +35,10 @@ namespace Hackaton.SHARED.Entities
         [MaxLength(20, ErrorMessage = "El {3} no puede tener mas de 20 caracteres.")]
         [Required(ErrorMessage = "El {3} es obligatorio.")]
         public string Area { get; set; }
+
+        [JsonIgnore]
+        public Equipo Equipo { get; set; } //RECIBE LLAVE FORANEA DE EQUIPO
+        public int EquipoId { get; set; }
 
     }
 }

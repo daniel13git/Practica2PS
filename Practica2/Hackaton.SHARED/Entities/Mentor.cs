@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Hackaton.Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
@@ -28,5 +30,13 @@ namespace Hackaton.SHARED.Entities
         [MaxLength(50, ErrorMessage = "El {2} no puede tener mas de 50 caracteres.")]
         [Required(ErrorMessage = "El {2} es obligatorio.")]
         public string AreaExperta { get; set; }
+
+
+        [JsonIgnore]
+        public ICollection<Evaluacion> Evaluacion { get; set; }  //ENVIA FORANEA A EVALUACION
+
+
+
+
     }
 }

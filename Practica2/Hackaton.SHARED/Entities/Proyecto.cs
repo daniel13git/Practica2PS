@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Hackaton.Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
@@ -36,10 +38,20 @@ namespace Hackaton.SHARED.Entities
         public string Estado { get; set; }
 
 
-        [Display(Name = "Fecha de entrega fianl")]
+        [Display(Name = "Fecha de entrega final")]
         [Required(ErrorMessage = "Esta fecha es obligatorio.")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaEntrega { get; set; }
+
+
+        [JsonIgnore]
+        public Equipo Equipo { get; set; } //RECIBE LLAVE FORANEA DE EQUIPO
+        public int EquipoId { get; set; }
+
+
+
+        [JsonIgnore]
+        public ICollection<Evaluacion> Evaluacion { get; set; }  //ENVIA FORANEA A EVALUACION
     }
 }

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hackaton.SHARED.Entities
 {
-    public class Hackaton
+    public class Evento
     {
         // Primary key - autoincrement
         public int Id { get; set; }
@@ -35,6 +36,11 @@ namespace Hackaton.SHARED.Entities
         [Required(ErrorMessage = "El {3} es obligatorio.")]
         public string Organizador { get; set; }
 
+        [Display(Name = "Premio")]
+        [MaxLength(50, ErrorMessage = "El {4} no puede tener mas de 50 caracteres.")]
+        [Required(ErrorMessage = "El {4} es obligatorio.")]
+        public string Premio { get; set; }
+
 
         [Display(Name = "Fecha de inicio")]
         [Required(ErrorMessage = "Esta fecha es obligatorio.")]
@@ -48,5 +54,11 @@ namespace Hackaton.SHARED.Entities
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaFin { get; set; }
+
+
+        [JsonIgnore]
+        public ICollection<Equipo> Equipo { get; set; }  //ENVIA FORANEA A EQUIPO
+        
+
     }
 }
