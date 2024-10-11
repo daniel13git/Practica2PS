@@ -1,0 +1,6 @@
+@Plataforma_TechInnovators.API_HostAddress = http://localhost:5291
+
+GET {{Plataforma_TechInnovators.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
