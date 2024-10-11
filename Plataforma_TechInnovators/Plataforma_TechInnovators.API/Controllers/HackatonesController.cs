@@ -66,6 +66,16 @@ namespace Plataforma_TechInnovators.API.Controllers
 
         }
 
+        // Put: Modificar
+        [HttpPut]
+        public async Task<ActionResult> Put(Hackaton hackaton)
+        {
+            _context.Update(hackaton);
+            await _context.SaveChangesAsync();
+            return Ok(hackaton);
+        }
+
+
         //DELETE --> BORRAR UN EQUIPO
         [HttpDelete("{id:int}")] //Busque por parametro Id
         public async Task<ActionResult> Delete(int id)

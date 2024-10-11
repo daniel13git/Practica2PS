@@ -12,8 +12,8 @@ using Plataforma_TechInnovators.API.Data;
 namespace Plataforma_TechInnovators.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241011010829_1")]
-    partial class _1
+    [Migration("20241011032508_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
